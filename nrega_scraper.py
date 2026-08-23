@@ -2,6 +2,7 @@
 from bs4 import BeautifulSoup
 import json
 import os
+import re
 
 # PDF के आधार पर GP और TA mapping
 TA_MAPPING = {
@@ -12,7 +13,7 @@ TA_MAPPING = {
     "BELTARA": "SURYKANT TIGER", "BELTUKRI": "SAPNA BANJARE", "BHADI": "PURWA GUPTA",
     "BHAISBOD": "PRIYA YADAV", "BHARARI": "VIKAS RATHOR", "BHARVIDIH": "LALIT KUMAR SURYAVANSHI",
     "BHATGAON": "JAWAHAR KHANDE", "BHILMI": "VIKAS RATHOR", "BHOJPURI": "ROHIT SAHU",
-    "BITKULI N.": "PURWA GUPTA", "BITKULID": "JAWAHAR KHANDE", "BODSARA": "SAPNA BANJARE",
+    "BITKULIN": "PURWA GUPTA", "BITKULID": "JAWAHAR KHANDE", "BODSARA": "SAPNA BANJARE",
     "BUNDELA": "JAWAHAR KHANDE", "CHAKARBHANTA": "PRIYA YADAV", "CHORHADEWARI": "PURWA GUPTA",
     "DAGANIYA": "PURWA GUPTA", "DAGORI": "VIKAS RATHOR", "DEWKIRARI": "JAWAHAR KHANDE",
     "DHAMNI": "RAJENDRA KOSHLE", "DHAURABHANTA": "ROHIT SAHU", "DHEKA": "KAMINI VERMA",
@@ -24,7 +25,7 @@ TA_MAPPING = {
     "JHAL": "JAWAHAR KHANDE", "JHALPHA": "ROHIT SAHU", "KACHAR": "LALIT KUMAR SURYAVANSHI",
     "KADAR": "RAJENDRA KOSHLE", "KADARI": "SURYKANT TIGER", "KARHI": "SAPNA BANJARE",
     "KARMA": "PURWA GUPTA", "KAWANCHI": "RAJENDRA KOSHLE", "KAYA": "RAJENDRA KOSHLE",
-    "KHAIRA D": "PURWA GUPTA", "KHAIRAL": "KAMINI VERMA", "KHAIRKHUNDI": "LALIT KUMAR SURYAVANSHI",
+    "KHAIRAD": "PURWA GUPTA", "KHAIRAL": "KAMINI VERMA", "KHAIRKHUNDI": "LALIT KUMAR SURYAVANSHI",
     "KHAMHARDIH": "RAJENDRA KOSHLE", "KOHROUNDA": "SAPNA BANJARE", "KORBI": "SURYKANT TIGER",
     "KORMI": "RAJENDRA KOSHLE", "KUNWA": "RAJENDRA KOSHLE", "LAGRA": "KAMINI VERMA",
     "LAKHRAM": "PINKY RATHOR", "LIMHA": "SURYKANT TIGER", "LIMTARI": "PRIYA YADAV",
@@ -39,7 +40,7 @@ TA_MAPPING = {
     "PARSAHI": "KAMINI VERMA", "PASID": "SAPNA BANJARE", "PATTHARKHAN": "PRIYA YADAV",
     "PENDRAWA": "PINKY RATHOR", "PENDRAWAD": "ROHIT SAHU", "PENDRIDIH": "ROHIT SAHU",
     "PHARHADA": "KAMINI VERMA", "PIRAIYA": "SAPNA BANJARE", "PODIH": "RAJENDRA KOSHLE",
-    "PONDI S": "KAMINI VERMA", "POUNSARA": "LALIT KUMAR SURYAVANSHI", "POUNSARI": "SAPNA BANJARE",
+    "PONDIS": "KAMINI VERMA", "POUNSARA": "LALIT KUMAR SURYAVANSHI", "POUNSARI": "SAPNA BANJARE",
     "RAHNGI": "ROHIT SAHU", "RAMPUR": "VIKAS RATHOR", "RAMTALA": "PINKY RATHOR",
     "SALKHA": "SURYKANT TIGER", "SAMBALPURI": "ROHIT SAHU", "SARDHA": "RAJENDRA KOSHLE",
     "SARWANDEVRI": "LALIT KUMAR SURYAVANSHI", "SARWANI": "PRIYA YADAV", "SELAR": "PURWA GUPTA",
@@ -49,6 +50,10 @@ TA_MAPPING = {
     "TELSARA": "PRIYA YADAV", "UCHCHABHATTI": "PURWA GUPTA", "UDANTAL": "VIKAS RATHOR",
     "UDGAN": "JAWAHAR KHANDE", "UMARIYA": "JAWAHAR KHANDE", "URTUM": "SURYKANT TIGER"
 }
+
+def clean_name(name):
+    # केवल A-Z के अक्षर रखेगा, स्पेस और सिंबल (जैसे BRACKET, DOT) हटा देगा
+    return re.sub(r'[^A-Z]', '', name.upper())
 
 url = "https://vbgramgrep.dord.gov.in/VBGRAMG/dpc_sms_new.aspx?payload=bQyXd5YvpCRvEbmbPOYSEwETM7TTGZlQBI5C1Kz91hbfTupyDSrtq9n09VegDZziyytgG-GFw_vnrMspnzdDv7oEkEvWnm9jZme8j2p1c_DLhozD3mP_4r9euLZn8MVR7U9lGsA1G_8f9o8s3l7dZ2GjJ2CX5oYj--3eS6WxI7KvrPJ9FoqBzW3hfIhCfWPGEPLzRs8DmkJ3pTs8ZUawzAwGxVf40z5sGeHV0lnx0a5ynnvq2NSQm5P7SHJFeXTNQcjG3mOlmXVJh43bvIXIgcGG_UWjMsxR6HqoaypgO3SLjP6EUV1-CQ2gTG4zm6A5a2EVyBw9z5qGeLoBV6K5Ew"
 
@@ -66,17 +71,27 @@ try:
     data = []
     if table:
         rows = table.find_all('tr')
-        for row in rows[1:]:  # Skip header row
+        for row in rows[1:]:
             cols = row.find_all(['td', 'th'])
             if len(cols) >= 4:
                 gp = cols[1].text.strip()
                 labour = cols[2].text.strip()
                 mrs = cols[3].text.strip()
                 
-                # Matching TA name based on GP Name
-                gp_clean = gp.upper().strip()
-                ta_name = TA_MAPPING.get(gp_clean, "-")
+                # स्मार्ट मैचिंग लॉजिक
+                gp_cleaned = clean_name(gp)
+                ta_name = "-"
                 
+                # Direct lookup
+                if gp_cleaned in TA_MAPPING:
+                    ta_name = TA_MAPPING[gp_cleaned]
+                else:
+                    # Partial match finder
+                    for key, val in TA_MAPPING.items():
+                        if key in gp_cleaned or gp_cleaned in key:
+                            ta_name = val
+                            break
+
                 data.append({
                     "gp": gp,
                     "ta": ta_name,
@@ -88,10 +103,6 @@ try:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     print("Data extracted and live_data.json updated successfully with TA names!")
-
-    os.system('git add live_data.json')
-    os.system('git commit -m "Auto update live_data with TA names"')
-    os.system('git push origin main')
 
 except Exception as e:
     print(f"Error occurred: {e}")
