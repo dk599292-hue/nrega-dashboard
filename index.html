@@ -16,7 +16,7 @@
         th { background-color: #004080; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
         
-        /* 0 लेबर वाली रो के लिए डार्क रेड बैकग्राउंड */
+        /* 0 लेबर वाली पंचायत के लिए डार्क रेड हाइलाइट */
         tr.zero-labour { 
             background-color: #d32f2f !important; 
             color: #ffffff !important;             
@@ -62,7 +62,12 @@
                     return response.json();
                 })
                 .then(data => {
-                    rawData = data;
+                    // फिल्टर: हेडर या अमान्य पंक्तियों को हटाना (जैसे '2', 'Total' आदि)
+                    rawData = data.filter(item => {
+                        const gp = (item.gp || item.GP || item.gram_panchayat || '').toString().trim();
+                        return gp !== '2' && gp.toLowerCase() !== 'total' && gp !== '';
+                    });
+                    
                     filterData('all'); 
                     updatePendingCount();
                 })
@@ -80,8 +85,8 @@
                 const tr = document.createElement('tr');
                 const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
                 
-                // 0 लेबर वाले में रेड कलर क्लास ऐड करना
-                if (labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total') {
+                // 0 लेबर होने पर डार्क रेड क्लास जोड़ना
+                if (labour === 0) {
                     tr.classList.add('zero-labour');
                 }
 
@@ -100,20 +105,15 @@
             if (type === 'pending') {
                 const pending = rawData.filter(item => {
                     const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
-                    return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
+                    return labour === 0;
                 });
                 renderTable(pending);
             } else {
+                // 0 लेबर वाले को ऊपर सॉर्ट करना
                 const sortedData = [...rawData].sort((a, b) => {
                     const labourA = parseInt(a.labour || a.Labour || a['Labour Engagement'] || 0);
                     const labourB = parseInt(b.labour || b.Labour || b['Labour Engagement'] || 0);
                     
-                    const gpA = (a.gp || a.GP || a.gram_panchayat || '').toLowerCase();
-                    const gpB = (b.gp || b.GP || b.gram_panchayat || '').toLowerCase();
-                    
-                    if (gpA === 'total') return 1;
-                    if (gpB === 'total') return -1;
-
                     if (labourA === 0 && labourB !== 0) return -1;
                     if (labourA !== 0 && labourB === 0) return 1;
                     return 0;
@@ -125,7 +125,7 @@
         function updatePendingCount() {
             const pendingCount = rawData.filter(item => {
                 const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
-                return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
+                return labour === 0;
             }).length;
             
             document.getElementById('pendingBtn').innerText = `${pendingCount} Labour (Pending GP) केवल 0 वाले देखें`;
