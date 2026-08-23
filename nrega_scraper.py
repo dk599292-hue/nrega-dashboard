@@ -71,18 +71,17 @@ try:
         rows = table.find_all('tr')
         for row in rows:
             cols = row.find_all(['td', 'th'])
-            # कम से कम 8 कॉलम होने चाहिए
-            if len(cols) >= 8:
+            if len(cols) >= 6:
                 sno = cols[0].text.strip()
                 gp = cols[1].text.strip()
                 
-                # हेडर रो या टोटल वाली रो को स्किप करना
                 if not sno.isdigit() or gp.lower() == 'total':
                     continue
 
-                # सही कॉलम इंडेक्स पकड़ना
-                labour = cols[4].text.strip()  # Column 5 (Unskilled Labour)
-                mrs = cols[7].text.strip()     # Column 8 (No. of MRs)
+                # Column 5 = Labour Engagement (index 4)
+                # Column 6 = Ongoing Works / MR Issued (index 5)
+                labour = cols[4].text.strip()
+                mrs = cols[5].text.strip()
                 
                 gp_cleaned = clean_name(gp)
                 ta_name = "-"
@@ -105,7 +104,7 @@ try:
     with open('live_data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print("Scraped exact columns successfully!")
+    print("Updated using Column 5 and Column 6 successfully!")
 
 except Exception as e:
     print(f"Error occurred: {e}")
