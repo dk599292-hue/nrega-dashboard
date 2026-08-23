@@ -16,7 +16,7 @@
         th { background-color: #004080; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
         
-        /* 0 लेबर वाली रो के लिए डार्क रेड स्टाइल */
+        /* 0 लेबर वाली रो के लिए डार्क रेड बैकग्राउंड */
         tr.zero-labour { 
             background-color: #d32f2f !important; 
             color: #ffffff !important;             
@@ -24,6 +24,7 @@
         }
         tr.zero-labour td {
             border-color: #b71c1c !important;     
+            color: #ffffff !important;
         }
     </style>
 </head>
@@ -79,6 +80,7 @@
                 const tr = document.createElement('tr');
                 const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
                 
+                // 0 लेबर वाले में रेड कलर क्लास ऐड करना
                 if (labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total') {
                     tr.classList.add('zero-labour');
                 }
