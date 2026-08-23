@@ -1,94 +1,102 @@
 ﻿<!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>NREGA Live Status Dashboard</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 15px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-    th { background-color: #004080; color: white; }
-    .zero-labour { background-color: #ffcccc; font-weight: bold; }
-    button { padding: 8px 12px; margin-right: 10px; cursor: pointer; }
-    .file-box { background-color: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NREGA Live Status Dashboard (Bilaspur - Belha)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f9; }
+        h2 { color: #333; }
+        .btn-group { margin-bottom: 15px; }
+        button { padding: 8px 15px; margin-right: 10px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
+        .btn-all { background-color: #e0e0e0; color: #333; }
+        .btn-pending { background-color: #f44336; color: white; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #004080; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .zero-labour { background-color: #ffebee; color: #c62828; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-  <h2>NREGA Live Status Dashboard (Bilaspur - Belha)</h2>
+    <h2>NREGA Live Status Dashboard (Bilaspur - Belha)</h2>
 
-  <div class="file-box">
-    <label><b>1. live_data.json फाइल चुनें: </b></label>
-    <input type="file" id="fileInput" accept=".json" onchange="loadJSONFile(event)">
-  </div>
+    <div class="btn-group">
+        <button class="btn-all" onclick="filterData('all')">सभी ग्राम पंचायतें देखें</button>
+        <button class="btn-pending" id="pendingBtn" onclick="filterData('pending')">0 Labour (Pending GP) देखें</button>
+    </div>
 
-  <div>
-    <button onclick="showAll()">सभी ग्राम पंचायतें देखें</button>
-    <button onclick="showZeroLabourOnly()" style="background-color: #ff4d4d; color: white; border: none;">0 Labour (Pending GP) देखें</button>
-  </div>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Gram Panchayat</th>
+                <th>Labour Engagement</th>
+                <th>No. of MRs</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr><td colspan="4">डेटा लोड हो रहा है...</td></tr>
+        </tbody>
+    </table>
 
-  <p id="statusCount" style="margin-top: 15px; font-weight: bold;"></p>
+    <script>
+        let rawData = [];
 
-  <table>
-    <thead>
-      <tr>
-        <th>S.No.</th>
-        <th>Gram Panchayat</th>
-        <th>Labour Engagement</th>
-        <th>No. of MRs</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-      <tr><td colspan="4">कृपया ऊपर से live_data.json फाइल चुनें...</td></tr>
-    </tbody>
-  </table>
+        // स्वचालित रूप से live_data.json से डेटा लोड करना
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('live_data.json')
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found");
+                    return response.json();
+                })
+                .then(data => {
+                    rawData = data;
+                    renderTable(rawData);
+                    updatePendingCount();
+                })
+                .catch(err => {
+                    document.getElementById('tableBody').innerHTML = 
+                        '<tr><td colspan="4" style="color:red;">live_data.json फ़ाइल लोड नहीं हो सकी। कृपया जाँचें कि फ़ाइल सही नाम से अपलोड हुई है।</td></tr>';
+                });
+        });
 
-  <script>
-    let masterData = [];
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
 
-    function loadJSONFile(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+            data.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                const labour = parseInt(item.labour || item.Labour || 0);
+                
+                if (labour === 0) {
+                    tr.classList.add('zero-labour');
+                }
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        masterData = JSON.parse(e.target.result);
-        showAll();
-      };
-      reader.readAsText(file);
-    }
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.gp || item.GP || item.gram_panchayat || ''}</td>
+                    <td>${labour}</td>
+                    <td>${item.mrs || item.MRs || item.mr_count || 0}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
 
-    function renderTable(data) {
-      const tbody = document.getElementById("tableBody");
-      tbody.innerHTML = "";
-      
-      if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4">कोई डेटा नहीं मिला।</td></tr>';
-        return;
-      }
+        function filterData(type) {
+            if (type === 'pending') {
+                const pending = rawData.filter(item => parseInt(item.labour || item.Labour || 0) === 0);
+                renderTable(pending);
+            } else {
+                renderTable(rawData);
+            }
+        }
 
-      data.forEach(item => {
-        const rowClass = item.labour === 0 ? "zero-labour" : "";
-        tbody.innerHTML += `<tr class="${rowClass}">
-          <td>${item.sno}</td>
-          <td>${item.gp}</td>
-          <td>${item.labour}</td>
-          <td>${item.mrs}</td>
-        </tr>`;
-      });
-
-      document.getElementById("statusCount").innerText = `कुल रिकॉर्ड दिख रहे हैं: ${data.length}`;
-    }
-
-    function showAll() {
-      renderTable(masterData);
-    }
-
-    function showZeroLabourOnly() {
-      const zeroLabour = masterData.filter(item => item.labour === 0);
-      renderTable(zeroLabour);
-    }
-  </script>
-
+        function updatePendingCount() {
+            const pendingCount = rawData.filter(item => parseInt(item.labour || item.Labour || 0) === 0).length;
+            document.getElementById('pendingBtn').innerText = `${pendingCount} Labour (Pending GP) देखें`;
+        }
+    </script>
 </body>
 </html>
