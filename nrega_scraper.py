@@ -4,7 +4,6 @@ import json
 import os
 import re
 
-# PDF के आधार पर GP और TA mapping
 TA_MAPPING = {
     "AKALTARI": "SURYKANT TIGER", "AMALDHIHA": "SAPNA BANJARE", "AMERIAKBARI": "SAPNA BANJARE",
     "AMERIKAPA": "SAPNA BANJARE", "ATTRA": "ROHIT SAHU", "BAIMA": "KAMINI VERMA",
@@ -52,7 +51,6 @@ TA_MAPPING = {
 }
 
 def clean_name(name):
-    # केवल A-Z के अक्षर रखेगा, स्पेस और सिंबल (जैसे BRACKET, DOT) हटा देगा
     return re.sub(r'[^A-Z]', '', name.upper())
 
 url = "https://vbgramgrep.dord.gov.in/VBGRAMG/dpc_sms_new.aspx?payload=bQyXd5YvpCRvEbmbPOYSEwETM7TTGZlQBI5C1Kz91hbfTupyDSrtq9n09VegDZziyytgG-GFw_vnrMspnzdDv7oEkEvWnm9jZme8j2p1c_DLhozD3mP_4r9euLZn8MVR7U9lGsA1G_8f9o8s3l7dZ2GjJ2CX5oYj--3eS6WxI7KvrPJ9FoqBzW3hfIhCfWPGEPLzRs8DmkJ3pTs8ZUawzAwGxVf40z5sGeHV0lnx0a5ynnvq2NSQm5P7SHJFeXTNQcjG3mOlmXVJh43bvIXIgcGG_UWjMsxR6HqoaypgO3SLjP6EUV1-CQ2gTG4zm6A5a2EVyBw9z5qGeLoBV6K5Ew"
@@ -71,22 +69,27 @@ try:
     data = []
     if table:
         rows = table.find_all('tr')
-        for row in rows[1:]:
+        for row in rows:
             cols = row.find_all(['td', 'th'])
-            if len(cols) >= 4:
+            # कम से कम 8 कॉलम होने चाहिए
+            if len(cols) >= 8:
+                sno = cols[0].text.strip()
                 gp = cols[1].text.strip()
-                labour = cols[2].text.strip()
-                mrs = cols[3].text.strip()
                 
-                # स्मार्ट मैचिंग लॉजिक
+                # हेडर रो या टोटल वाली रो को स्किप करना
+                if not sno.isdigit() or gp.lower() == 'total':
+                    continue
+
+                # सही कॉलम इंडेक्स पकड़ना
+                labour = cols[4].text.strip()  # Column 5 (Unskilled Labour)
+                mrs = cols[7].text.strip()     # Column 8 (No. of MRs)
+                
                 gp_cleaned = clean_name(gp)
                 ta_name = "-"
                 
-                # Direct lookup
                 if gp_cleaned in TA_MAPPING:
                     ta_name = TA_MAPPING[gp_cleaned]
                 else:
-                    # Partial match finder
                     for key, val in TA_MAPPING.items():
                         if key in gp_cleaned or gp_cleaned in key:
                             ta_name = val
@@ -102,7 +105,7 @@ try:
     with open('live_data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print("Data extracted and live_data.json updated successfully with TA names!")
+    print("Scraped exact columns successfully!")
 
 except Exception as e:
     print(f"Error occurred: {e}")

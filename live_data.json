@@ -2,25 +2,19 @@
   {
     "gp": "2",
     "ta": "SURYKANT TIGER",
-    "labour": "3",
-    "mrs": "4"
-  },
-  {
-    "gp": "Total",
-    "ta": "-",
-    "labour": "127",
-    "mrs": "95"
+    "labour": "5",
+    "mrs": "8"
   },
   {
     "gp": "AKALTARI",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "AMALDHIHA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "3",
     "mrs": "1"
   },
   {
@@ -32,19 +26,19 @@
   {
     "gp": "AMERIKAPA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "4",
+    "mrs": "2"
   },
   {
     "gp": "ATTRA",
     "ta": "ROHIT SAHU",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "5",
+    "mrs": "3"
   },
   {
     "gp": "BAIMA",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -56,31 +50,31 @@
   {
     "gp": "BANAKDIH",
     "ta": "PRIYA YADAV",
-    "labour": "1",
+    "labour": "4",
     "mrs": "1"
   },
   {
     "gp": "BANKA",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "2",
+    "mrs": "2"
   },
   {
     "gp": "BARTOURI",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "19",
+    "mrs": "9"
   },
   {
     "gp": "BASHA",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "BASIYA",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
+    "labour": "3",
     "mrs": "1"
   },
   {
@@ -92,43 +86,43 @@
   {
     "gp": "BELTUKRI",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "8",
     "mrs": "1"
   },
   {
     "gp": "BHADI",
     "ta": "PURWA GUPTA",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "9",
+    "mrs": "3"
   },
   {
     "gp": "BHAISBOD",
     "ta": "PRIYA YADAV",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "BHARARI",
     "ta": "VIKAS RATHOR",
-    "labour": "1",
+    "labour": "3",
     "mrs": "1"
   },
   {
     "gp": "BHARVIDIH",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "9",
+    "mrs": "4"
   },
   {
     "gp": "BHATGAON",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "BHILMI",
     "ta": "VIKAS RATHOR",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
@@ -140,26 +134,26 @@
   {
     "gp": "BITKULI  N.",
     "ta": "PURWA GUPTA",
-    "labour": "1",
+    "labour": "4",
     "mrs": "1"
   },
   {
     "gp": "BITKULI(D)",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "8",
+    "mrs": "2"
   },
   {
     "gp": "BODSARA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "6",
+    "mrs": "3"
   },
   {
     "gp": "BUNDELA",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "3",
+    "mrs": "2"
   },
   {
     "gp": "CHAKARBHANTA",
@@ -170,62 +164,62 @@
   {
     "gp": "CHORHADEWARI",
     "ta": "PURWA GUPTA",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "35",
+    "mrs": "16"
   },
   {
     "gp": "DAGANIYA",
     "ta": "PURWA GUPTA",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "DAGORI",
     "ta": "VIKAS RATHOR",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "DEWKIRARI",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "6",
+    "mrs": "3"
   },
   {
     "gp": "DHAMNI",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "DHAURABHANTA",
     "ta": "ROHIT SAHU",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "17",
+    "mrs": "6"
   },
   {
     "gp": "DHEKA",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "3",
     "mrs": "1"
   },
   {
     "gp": "DHOOMA",
     "ta": "KAMINI VERMA",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "2",
+    "mrs": "2"
   },
   {
     "gp": "DHOURAMUDA",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "DURGADIH",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "13",
+    "mrs": "6"
   },
   {
     "gp": "GADVAT",
@@ -236,26 +230,26 @@
   {
     "gp": "GATOURI",
     "ta": "PINKY RATHOR",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "GHOGHARA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "GIDHOURI",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "GODHI",
     "ta": "ROHIT SAHU",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "37",
+    "mrs": "7"
   },
   {
     "gp": "GONDAIYA",
@@ -272,14 +266,14 @@
   {
     "gp": "HARDHI",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "HARDIKALA",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "7",
+    "mrs": "3"
   },
   {
     "gp": "HATHNI",
@@ -290,7 +284,7 @@
   {
     "gp": "HIRRI",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -308,79 +302,79 @@
   {
     "gp": "JHALPHA",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "KACHAR",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
+    "labour": "4",
     "mrs": "1"
   },
   {
     "gp": "KADAR",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "7",
+    "mrs": "4"
   },
   {
     "gp": "KADARI",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
+    "labour": "5",
     "mrs": "1"
   },
   {
     "gp": "KARHI",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "5",
     "mrs": "1"
   },
   {
     "gp": "KARMA",
     "ta": "PURWA GUPTA",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "KAWANCHI",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "22",
+    "mrs": "11"
   },
   {
     "gp": "KAYA",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "KHAIRA   D",
     "ta": "PURWA GUPTA",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "KHAIRA(L)",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "KHAIRKHUNDI",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "KHAMHARDIH",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "KOHROUNDA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -392,7 +386,7 @@
   {
     "gp": "KORMI",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -404,37 +398,37 @@
   {
     "gp": "LAGRA",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "LAKHRAM",
     "ta": "PINKY RATHOR",
-    "labour": "1",
+    "labour": "7",
     "mrs": "1"
   },
   {
     "gp": "LIMHA",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "4",
+    "mrs": "2"
   },
   {
     "gp": "LIMTARI",
     "ta": "PRIYA YADAV",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "6",
+    "mrs": "2"
   },
   {
     "gp": "LOPHANDI",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "MADANPUR",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
+    "labour": "4",
     "mrs": "1"
   },
   {
@@ -446,26 +440,26 @@
   {
     "gp": "MAHMAND",
     "ta": "PRIYA YADAV",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "4",
+    "mrs": "3"
   },
   {
     "gp": "MANGALA P",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "10",
     "mrs": "1"
   },
   {
     "gp": "MANIKPUR",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "4",
     "mrs": "1"
   },
   {
     "gp": "MANJOORPAHARI",
     "ta": "VIKAS RATHOR",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "21",
+    "mrs": "9"
   },
   {
     "gp": "MATIYARI",
@@ -476,7 +470,7 @@
   {
     "gp": "MOHBATTHA",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -488,43 +482,43 @@
   {
     "gp": "MOHRA",
     "ta": "PURWA GUPTA",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "MOHTARA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "7",
+    "mrs": "5"
   },
   {
     "gp": "MOHTARAI",
     "ta": "PINKY RATHOR",
-    "labour": "1",
+    "labour": "10",
     "mrs": "1"
   },
   {
     "gp": "MUDHIPAR",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "MURKUTA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "32",
+    "mrs": "19"
   },
   {
     "gp": "NAGOI",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "NAGPURA",
     "ta": "PRIYA YADAV",
-    "labour": "1",
+    "labour": "3",
     "mrs": "1"
   },
   {
@@ -536,43 +530,43 @@
   {
     "gp": "NAVGWA",
     "ta": "PINKY RATHOR",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "10",
+    "mrs": "2"
   },
   {
     "gp": "NEPANIYA",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "NEVSA",
     "ta": "VIKAS RATHOR",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "PARSADA(BH)",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "PARSADA(Se)",
     "ta": "PINKY RATHOR",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "PARSAHI",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "3",
     "mrs": "1"
   },
   {
     "gp": "PASID",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -584,50 +578,50 @@
   {
     "gp": "PENDRAWA",
     "ta": "PINKY RATHOR",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "98",
+    "mrs": "14"
   },
   {
     "gp": "PENDRAWA(D)",
     "ta": "ROHIT SAHU",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "PENDRIDIH",
     "ta": "ROHIT SAHU",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "64",
+    "mrs": "23"
   },
   {
     "gp": "PHARHADA",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "PIRAIYA",
     "ta": "SAPNA BANJARE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "PODI(H)",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "12",
+    "mrs": "2"
   },
   {
     "gp": "PONDI s",
     "ta": "KAMINI VERMA",
-    "labour": "1",
+    "labour": "2",
     "mrs": "1"
   },
   {
     "gp": "POUNSARA",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "8",
+    "mrs": "2"
   },
   {
     "gp": "POUNSARI",
@@ -638,20 +632,20 @@
   {
     "gp": "RAHNGI",
     "ta": "ROHIT SAHU",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "8",
+    "mrs": "4"
   },
   {
     "gp": "RAMPUR",
     "ta": "VIKAS RATHOR",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "RAMTALA",
     "ta": "PINKY RATHOR",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "10",
+    "mrs": "5"
   },
   {
     "gp": "SALKHA",
@@ -662,19 +656,19 @@
   {
     "gp": "SAMBALPURI",
     "ta": "ROHIT SAHU",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "4",
+    "mrs": "3"
   },
   {
     "gp": "SARDHA",
     "ta": "RAJENDRA KOSHLE",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "SARWANDEVRI",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
@@ -686,20 +680,20 @@
   {
     "gp": "SELAR",
     "ta": "PURWA GUPTA",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "6",
+    "mrs": "2"
   },
   {
     "gp": "Semartala",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "17",
+    "mrs": "9"
   },
   {
     "gp": "SEMRA",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "9",
+    "mrs": "3"
   },
   {
     "gp": "SENDRI",
@@ -710,8 +704,8 @@
   {
     "gp": "SENWAR",
     "ta": "PRIYA YADAV",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "6",
+    "mrs": "5"
   },
   {
     "gp": "SEWTI",
@@ -722,14 +716,14 @@
   {
     "gp": "SILPAHRI",
     "ta": "KAMINI VERMA",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "5",
+    "mrs": "2"
   },
   {
     "gp": "SINGHARI",
     "ta": "LALIT KUMAR SURYAVANSHI",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "4",
+    "mrs": "2"
   },
   {
     "gp": "TEKAR",
@@ -740,14 +734,14 @@
   {
     "gp": "TELSARA",
     "ta": "PRIYA YADAV",
-    "labour": "1",
+    "labour": "0",
     "mrs": "0"
   },
   {
     "gp": "UCHCHABHATTI",
     "ta": "PURWA GUPTA",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "2",
+    "mrs": "2"
   },
   {
     "gp": "UDANTAL",
@@ -758,25 +752,19 @@
   {
     "gp": "UDGAN",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
-    "mrs": "1"
+    "labour": "2",
+    "mrs": "2"
   },
   {
     "gp": "UMARIYA",
     "ta": "JAWAHAR KHANDE",
-    "labour": "1",
+    "labour": "7",
     "mrs": "1"
   },
   {
     "gp": "URTUM",
     "ta": "SURYKANT TIGER",
-    "labour": "1",
-    "mrs": "1"
-  },
-  {
-    "gp": "Total",
-    "ta": "-",
-    "labour": "127",
-    "mrs": "95"
+    "labour": "9",
+    "mrs": "5"
   }
 ]
