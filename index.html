@@ -40,13 +40,14 @@
         <thead>
             <tr>
                 <th>S.No.</th>
+                <th>TA Name</th>
                 <th>Gram Panchayat</th>
                 <th>Labour Engagement</th>
                 <th>No. of MRs</th>
             </tr>
         </thead>
         <tbody id="tableBody">
-            <tr><td colspan="4">डेटा लोड हो रहा है...</td></tr>
+            <tr><td colspan="5">डेटा लोड हो रहा है...</td></tr>
         </tbody>
     </table>
 
@@ -61,13 +62,12 @@
                 })
                 .then(data => {
                     rawData = data;
-                    // बिना क्लिक किए पेज खुलते ही 0 वाले सबसे ऊपर ग्रुप होकर दिखेंगे
                     filterData('all'); 
                     updatePendingCount();
                 })
                 .catch(err => {
                     document.getElementById('tableBody').innerHTML = 
-                        '<tr><td colspan="4" style="color:red;">live_data.json फ़ाइल लोड नहीं हो सकी।</td></tr>';
+                        '<tr><td colspan="5" style="color:red;">live_data.json फ़ाइल लोड नहीं हो सकी।</td></tr>';
                 });
         });
 
@@ -85,6 +85,7 @@
 
                 tr.innerHTML = `
                     <td>${index + 1}</td>
+                    <td>${item.ta || item.TA || item.ta_name || item['TA Name'] || '-'}</td>
                     <td>${item.gp || item.GP || item.gram_panchayat || item['Gram Panchayat'] || ''}</td>
                     <td>${labour}</td>
                     <td>${item.mrs || item.MRs || item.mr_count || item['No. of MRs'] || 0}</td>
@@ -95,14 +96,12 @@
 
         function filterData(type) {
             if (type === 'pending') {
-                // केवल 0 वाले फ़िल्टर करके दिखाना
                 const pending = rawData.filter(item => {
                     const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
                     return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
                 });
                 renderTable(pending);
             } else {
-                // पेज खुलते ही 0 लेबर वाले सबसे ऊपर और बाकी नीचे ऑटो-सॉर्ट होंगे
                 const sortedData = [...rawData].sort((a, b) => {
                     const labourA = parseInt(a.labour || a.Labour || a['Labour Engagement'] || 0);
                     const labourB = parseInt(b.labour || b.Labour || b['Labour Engagement'] || 0);
@@ -110,11 +109,9 @@
                     const gpA = (a.gp || a.GP || a.gram_panchayat || '').toLowerCase();
                     const gpB = (b.gp || b.GP || b.gram_panchayat || '').toLowerCase();
                     
-                    // 'Total' वाली रो हमेशा सबसे नीचे रहेगी
                     if (gpA === 'total') return 1;
                     if (gpB === 'total') return -1;
 
-                    // 0 वाले सबसे ऊपर ग्रुप होंगे
                     if (labourA === 0 && labourB !== 0) return -1;
                     if (labourA !== 0 && labourB === 0) return 1;
                     return 0;
