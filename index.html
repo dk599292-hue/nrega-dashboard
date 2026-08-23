@@ -16,14 +16,14 @@
         th { background-color: #004080; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
         
-        /* 0 लेबर वाली पूरी रो के लिए डार्क/सॉलिड रेड स्टाइल */
+        /* 0 लेबर वाली रो के लिए डार्क रेड स्टाइल */
         tr.zero-labour { 
-            background-color: #d32f2f !important; /* पूरा रेड बैकग्राउंड */
-            color: #ffffff !important;             /* सफ़ेद टेक्स्ट */
+            background-color: #d32f2f !important; 
+            color: #ffffff !important;             
             font-weight: bold;
         }
         tr.zero-labour td {
-            border-color: #b71c1c !important;     /* लाल बॉर्डर */
+            border-color: #b71c1c !important;     
         }
     </style>
 </head>
@@ -33,7 +33,7 @@
 
     <div class="btn-group">
         <button class="btn-all" onclick="filterData('all')">सभी ग्राम पंचायतें देखें</button>
-        <button class="btn-pending" id="pendingBtn" onclick="filterData('pending')">0 Labour (Pending GP) देखें</button>
+        <button class="btn-pending" id="pendingBtn" onclick="filterData('pending')">केवल 0 वाले देखें</button>
     </div>
 
     <table>
@@ -61,7 +61,8 @@
                 })
                 .then(data => {
                     rawData = data;
-                    renderTable(rawData);
+                    // बिना क्लिक किए पेज खुलते ही 0 वाले सबसे ऊपर ग्रुप होकर दिखेंगे
+                    filterData('all'); 
                     updatePendingCount();
                 })
                 .catch(err => {
@@ -94,13 +95,31 @@
 
         function filterData(type) {
             if (type === 'pending') {
+                // केवल 0 वाले फ़िल्टर करके दिखाना
                 const pending = rawData.filter(item => {
                     const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
                     return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
                 });
                 renderTable(pending);
             } else {
-                renderTable(rawData);
+                // पेज खुलते ही 0 लेबर वाले सबसे ऊपर और बाकी नीचे ऑटो-सॉर्ट होंगे
+                const sortedData = [...rawData].sort((a, b) => {
+                    const labourA = parseInt(a.labour || a.Labour || a['Labour Engagement'] || 0);
+                    const labourB = parseInt(b.labour || b.Labour || b['Labour Engagement'] || 0);
+                    
+                    const gpA = (a.gp || a.GP || a.gram_panchayat || '').toLowerCase();
+                    const gpB = (b.gp || b.GP || b.gram_panchayat || '').toLowerCase();
+                    
+                    // 'Total' वाली रो हमेशा सबसे नीचे रहेगी
+                    if (gpA === 'total') return 1;
+                    if (gpB === 'total') return -1;
+
+                    // 0 वाले सबसे ऊपर ग्रुप होंगे
+                    if (labourA === 0 && labourB !== 0) return -1;
+                    if (labourA !== 0 && labourB === 0) return 1;
+                    return 0;
+                });
+                renderTable(sortedData);
             }
         }
 
@@ -110,7 +129,7 @@
                 return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
             }).length;
             
-            document.getElementById('pendingBtn').innerText = `${pendingCount} Labour (Pending GP) देखें`;
+            document.getElementById('pendingBtn').innerText = `${pendingCount} Labour (Pending GP) केवल 0 वाले देखें`;
         }
     </script>
 </body>
