@@ -10,12 +10,21 @@
         .btn-group { margin-bottom: 15px; }
         button { padding: 8px 15px; margin-right: 10px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; }
         .btn-all { background-color: #e0e0e0; color: #333; }
-        .btn-pending { background-color: #f44336; color: white; }
+        .btn-pending { background-color: #d32f2f; color: white; }
         table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
         th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
         th { background-color: #004080; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
-        .zero-labour { background-color: #ffebee; color: #c62828; font-weight: bold; }
+        
+        /* 0 लेबर वाली पूरी रो को हाइलाइट करने की स्टाइल */
+        tr.zero-labour { 
+            background-color: #ffcdd2 !important; /* गहरा हल्का लाल बैकग्राउंड */
+            color: #b71c1c;                       /* गहरा लाल टेक्स्ट */
+            font-weight: bold;                    /* बोल्ड टेक्स्ट */
+        }
+        tr.zero-labour td {
+            border-color: #e57373;                 /* बॉर्डर भी रेड टोन में */
+        }
     </style>
 </head>
 <body>
@@ -44,7 +53,6 @@
     <script>
         let rawData = [];
 
-        // स्वचालित रूप से live_data.json से डेटा लोड करना
         window.addEventListener('DOMContentLoaded', () => {
             fetch('live_data.json')
                 .then(response => {
@@ -58,7 +66,7 @@
                 })
                 .catch(err => {
                     document.getElementById('tableBody').innerHTML = 
-                        '<tr><td colspan="4" style="color:red;">live_data.json फ़ाइल लोड नहीं हो सकी। कृपया जाँचें कि फ़ाइल सही नाम से अपलोड हुई है।</td></tr>';
+                        '<tr><td colspan="4" style="color:red;">live_data.json फ़ाइल लोड नहीं हो सकी।</td></tr>';
                 });
         });
 
@@ -68,17 +76,18 @@
 
             data.forEach((item, index) => {
                 const tr = document.createElement('tr');
-                const labour = parseInt(item.labour || item.Labour || 0);
+                const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
                 
-                if (labour === 0) {
+                // 0 होने पर पूरी रो पर zero-labour क्लास लगाना
+                if (labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total') {
                     tr.classList.add('zero-labour');
                 }
 
                 tr.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${item.gp || item.GP || item.gram_panchayat || ''}</td>
+                    <td>${item.gp || item.GP || item.gram_panchayat || item['Gram Panchayat'] || ''}</td>
                     <td>${labour}</td>
-                    <td>${item.mrs || item.MRs || item.mr_count || 0}</td>
+                    <td>${item.mrs || item.MRs || item.mr_count || item['No. of MRs'] || 0}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -86,7 +95,10 @@
 
         function filterData(type) {
             if (type === 'pending') {
-                const pending = rawData.filter(item => parseInt(item.labour || item.Labour || 0) === 0);
+                const pending = rawData.filter(item => {
+                    const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
+                    return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
+                });
                 renderTable(pending);
             } else {
                 renderTable(rawData);
@@ -94,7 +106,11 @@
         }
 
         function updatePendingCount() {
-            const pendingCount = rawData.filter(item => parseInt(item.labour || item.Labour || 0) === 0).length;
+            const pendingCount = rawData.filter(item => {
+                const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
+                return labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total';
+            }).length;
+            
             document.getElementById('pendingBtn').innerText = `${pendingCount} Labour (Pending GP) देखें`;
         }
     </script>
