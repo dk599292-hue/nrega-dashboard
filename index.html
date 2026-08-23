@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>NREGA Live Status Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #004080; color: white; }
+    .zero-labour { background-color: #ffcccc; font-weight: bold; }
+    button { padding: 8px 12px; margin-right: 10px; cursor: pointer; }
+    .file-box { background-color: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>NREGA Live Status Dashboard (Bilaspur - Belha)</h2>
+
+  <div class="file-box">
+    <label><b>1. live_data.json फाइल चुनें: </b></label>
+    <input type="file" id="fileInput" accept=".json" onchange="loadJSONFile(event)">
+  </div>
+
+  <div>
+    <button onclick="showAll()">सभी ग्राम पंचायतें देखें</button>
+    <button onclick="showZeroLabourOnly()" style="background-color: #ff4d4d; color: white; border: none;">0 Labour (Pending GP) देखें</button>
+  </div>
+
+  <p id="statusCount" style="margin-top: 15px; font-weight: bold;"></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Gram Panchayat</th>
+        <th>Labour Engagement</th>
+        <th>No. of MRs</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <tr><td colspan="4">कृपया ऊपर से live_data.json फाइल चुनें...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    let masterData = [];
+
+    function loadJSONFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        masterData = JSON.parse(e.target.result);
+        showAll();
+      };
+      reader.readAsText(file);
+    }
+
+    function renderTable(data) {
+      const tbody = document.getElementById("tableBody");
+      tbody.innerHTML = "";
+      
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4">कोई डेटा नहीं मिला।</td></tr>';
+        return;
+      }
+
+      data.forEach(item => {
+        const rowClass = item.labour === 0 ? "zero-labour" : "";
+        tbody.innerHTML += `<tr class="${rowClass}">
+          <td>${item.sno}</td>
+          <td>${item.gp}</td>
+          <td>${item.labour}</td>
+          <td>${item.mrs}</td>
+        </tr>`;
+      });
+
+      document.getElementById("statusCount").innerText = `कुल रिकॉर्ड दिख रहे हैं: ${data.length}`;
+    }
+
+    function showAll() {
+      renderTable(masterData);
+    }
+
+    function showZeroLabourOnly() {
+      const zeroLabour = masterData.filter(item => item.labour === 0);
+      renderTable(zeroLabour);
+    }
+  </script>
+
+</body>
+</html>
