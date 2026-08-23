@@ -16,14 +16,14 @@
         th { background-color: #004080; color: white; }
         tr:nth-child(even) { background-color: #f9f9f9; }
         
-        /* 0 लेबर वाली पूरी रो को हाइलाइट करने की स्टाइल */
+        /* 0 लेबर वाली पूरी रो के लिए डार्क/सॉलिड रेड स्टाइल */
         tr.zero-labour { 
-            background-color: #ffcdd2 !important; /* गहरा हल्का लाल बैकग्राउंड */
-            color: #b71c1c;                       /* गहरा लाल टेक्स्ट */
-            font-weight: bold;                    /* बोल्ड टेक्स्ट */
+            background-color: #d32f2f !important; /* पूरा रेड बैकग्राउंड */
+            color: #ffffff !important;             /* सफ़ेद टेक्स्ट */
+            font-weight: bold;
         }
         tr.zero-labour td {
-            border-color: #e57373;                 /* बॉर्डर भी रेड टोन में */
+            border-color: #b71c1c !important;     /* लाल बॉर्डर */
         }
     </style>
 </head>
@@ -78,7 +78,6 @@
                 const tr = document.createElement('tr');
                 const labour = parseInt(item.labour || item.Labour || item['Labour Engagement'] || 0);
                 
-                // 0 होने पर पूरी रो पर zero-labour क्लास लगाना
                 if (labour === 0 && (item.gp || item.GP || item.gram_panchayat || '').toLowerCase() !== 'total') {
                     tr.classList.add('zero-labour');
                 }
